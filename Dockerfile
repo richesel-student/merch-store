@@ -13,7 +13,7 @@ RUN pdm venv create --force \
 
 FROM python:3.11-slim
 
-WORKDIR /app
+WORKDIR /app/merch_project
 
 COPY --from=builder /app/.venv /app/.venv
 
@@ -21,6 +21,8 @@ COPY . /app/
 
 ENV PATH="/app/.venv/bin:$PATH"
 
-EXPOSE 8000
+#COPY merch_project/static /app/static
+RUN python manage.py collectstatic --noinput
+EXPOSE 8080
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "merch_project.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "merch_project.wsgi:application"]
