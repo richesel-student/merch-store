@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 
-# Функция ожидания доступности сервиса
 wait_for_it() {
   local host="$1"
   local port="$2"

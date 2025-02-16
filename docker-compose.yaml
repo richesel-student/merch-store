@@ -6,7 +6,6 @@ services:
     container_name: django_app
     ports:
      - "8080:8080"
-#     - "5678:5678"
     depends_on:
       - db
       - redis
@@ -16,20 +15,14 @@ services:
     restart: always
     volumes:
     - static_volume:/app/merch_project/staticfiles
-#      - static_volume:/app/merch_project/staticfiles
-#      - ./staticfiles:/app/staticfiles
 
 
   db:
     image: postgres:16
     container_name: db
     restart: always
-#    environment:
     env_file:
       - .env
-#      POSTGRES_DB: mydatabase
-#      POSTGRES_USER: myuser
-#      POSTGRES_PASSWORD: mypassword
     ports:
       - "5432:5432"
     volumes:
@@ -45,11 +38,6 @@ services:
     restart: always
     links:
       - web
-#    volumes:
-#      - ./etc/nginx:/etc/nginx
-#      - /etc/nginx/nginx.conf:merch-store/etc/nginx
-#      - /merch-store/etc/nginx:/etc/nginx
-#      - .:app
     ports:
       - "80:80"
     depends_on:
